@@ -19,6 +19,9 @@
 <td><a href="pages/paginaPai.jsp">Load JQuery</a></td>
 </tr>
 <tr>
+<td><a href="pages/progressbar.jsp">Progress Bar</a></td>
+</tr>
+<tr>
 <td><a href="pages/ServletAutenticacao?deslogar=true">Deslogar</a></td>
 </tr>
 </table>
