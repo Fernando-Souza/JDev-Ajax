@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 
+import beans.UsuarioBean;
+import dao.UsuarioDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +16,8 @@ import user.UserLogado;
 @WebServlet(urlPatterns={"/pages/ServletAutenticacao"})
 public class ServletAutenticacao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	UsuarioDao userDao = new UsuarioDao();
 
     
     public ServletAutenticacao() {
@@ -44,9 +48,10 @@ public class ServletAutenticacao extends HttpServlet {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		if(login.equalsIgnoreCase("admin")&& senha.equalsIgnoreCase("123")) {
+		UsuarioBean usuarioLogado = userDao.consultar(login, senha);
+		
+		if(usuarioLogado != null) {
 			
-			UserLogado usuarioLogado = new UserLogado(login,senha);
 			session.setAttribute("usuario", usuarioLogado);
 			
 			RequestDispatcher dispatcher =  request.getRequestDispatcher(url);

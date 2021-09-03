@@ -2,6 +2,7 @@ package filters;
 
 import java.io.IOException;
 
+import beans.UsuarioBean;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -12,7 +13,6 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import user.UserLogado;
 
 @WebFilter(urlPatterns= {"/pages/*"})
 public class FilterAutentication implements Filter {
@@ -35,7 +35,7 @@ public class FilterAutentication implements Filter {
 		
 		String urlParaAutenticar = req.getServletPath();
 		
-		UserLogado userLogado = (UserLogado) session.getAttribute("usuario");
+		UsuarioBean userLogado = (UsuarioBean) session.getAttribute("usuario");
 		
 		if(userLogado==null && !urlParaAutenticar.equalsIgnoreCase("/pages/ServletAutenticacao")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp?urlaut="+urlParaAutenticar);
